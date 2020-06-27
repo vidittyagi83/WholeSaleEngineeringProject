@@ -15,6 +15,7 @@ namespace WholeSaleEngineeringApi.Service
         private readonly WholeSaleEngineeringContext WholeSaleEngineeringContext;
 
         #endregion
+
         #region Contructors
         //******************************************************************************
         public WholeSaleEngineeringService(WholeSaleEngineeringContext wholeSaleEngineeringContext)
@@ -22,15 +23,38 @@ namespace WholeSaleEngineeringApi.Service
             WholeSaleEngineeringContext = wholeSaleEngineeringContext;
         }
         #endregion
+        /// <summary>
+        /// this function will fetch account details from DB
+        /// </summary>
+        /// <returns>List<Accounts></returns>
         public List<Accounts> GetAccountDetails()
         {
-            List<Accounts> accountResponses = WholeSaleEngineeringContext.Accounts.ToList();
-            return accountResponses;
+            try
+            {
+                List<Accounts> accountResponses = WholeSaleEngineeringContext.Accounts.ToList();
+                return accountResponses;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
+        /// <summary>
+        /// this function will fetch transaction detail for given account number
+        /// </summary>
+        /// <param name="accountNumber"></param>
+        /// <returns></returns>
         public List<Transactions> GetTransactionsDetails(string accountNumber)
         {
-            List<Transactions> transactionsDetails = WholeSaleEngineeringContext.Transactions.Where(x => x.AccountNumber.Equals(accountNumber)).ToList();
-            return transactionsDetails;
+            try
+            {
+                List<Transactions> transactionsDetails = WholeSaleEngineeringContext.Transactions.Where(x => x.AccountNumber.Equals(accountNumber)).ToList();
+                return transactionsDetails;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
